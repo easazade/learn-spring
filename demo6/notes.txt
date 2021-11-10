@@ -1,0 +1,7 @@
+##################################################################
+run with gradle -> $ ./gradlew bootRun
+build with gradle -> $ ./gradlew build
+
+run with maven -> ./mvnw spring-boot:run
+build with maven -> ./mvnw clean package
+##################################################################
