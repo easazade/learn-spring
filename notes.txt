@@ -5,3 +5,5 @@ build with gradle -> $ ./gradlew build
 run with maven -> ./mvnw spring-boot:run
 build with maven -> ./mvnw clean package
 ##################################################################
+To resolve a dependency when it is added to maven run
+$ ./mvnw dependency:resolve
