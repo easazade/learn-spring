@@ -7,3 +7,14 @@ build with maven -> ./mvnw clean package
 ##################################################################
 To resolve a dependency when it is added to maven run
 $ ./mvnw dependency:resolve
+##################################################################
+JAVA BEANS:
+in order for the JVM to be able reconstruct an instance of a class from its serialzied value anywhere else or maybe later 
+in another machine. that class should follow 3 standards. 
+1- no public properties only private ones with getters and setters
+2- have a public no argument constructor
+3- be serializable 
+
+the classes that follow these 3 standards are called java beans
+
+spring boot's @Bean annotation indicates that the following method returns a bean object or the class is a bean
