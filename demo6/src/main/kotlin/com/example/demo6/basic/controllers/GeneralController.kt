@@ -14,7 +14,7 @@ class GeneralController {
 
   @GetMapping("/hello")
   fun hello(@RequestParam(value = "name", defaultValue = "Who Ever You Are") name: String): String {
-    return "Hello $name"
+    return "Hellooo $name"
   }
 
 }
