@@ -1,10 +1,10 @@
-package com.example.demo.data
+package com.example.demo.data.datasource
 
-import com.example.demo.Bank
+import com.example.demo.data.models.Bank
 import org.springframework.stereotype.Repository
 
 @Repository
-class MockBankDataSource : BankDataSrouce {
+class MockBankDataSource : BankDataSource {
 
   private val banks = listOf(
     Bank("7856", 3.14, 1),

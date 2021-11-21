@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.data.models
 
 data class Bank(
   val accountNumber: String,

@@ -1,6 +1,6 @@
 package com.example.demo
 
-import com.example.demo.data.MockBankDataSource
+import com.example.demo.data.datasource.MockBankDataSource
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
