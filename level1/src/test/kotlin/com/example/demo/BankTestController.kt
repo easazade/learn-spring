@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
 
 /***
@@ -128,6 +129,42 @@ internal class BankTestController @Autowired constructor(
           status { isBadRequest() }
         }
     }
+  }
+
+  @Nested
+  @DisplayName("PATCH /api/banks")
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  inner class PatchBank {
+
+    @Test
+    fun `should update an existing bank`() {
+      // given
+      val accountNumber = "1234"
+      val updatedBankObject = Bank(accountNumber, 222.0, 9)
+      val body = objectMapper.writeValueAsString(updatedBankObject)
+      // when
+      val performPatch = mockMvc.patch("/api/banks/$accountNumber") {
+        contentType = MediaType.APPLICATION_JSON
+        content = body
+      }
+
+      performPatch.andDo { print() }
+        .andExpect {
+          status { isOk() }
+          content {
+            json(body)
+          }
+        }
+
+
+      mockMvc.get("/api/banks/$accountNumber")
+        .andExpect {
+          content {
+            json(body)
+          }
+        }
+    }
+
   }
 
 }
