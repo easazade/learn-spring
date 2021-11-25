@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.delete
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
@@ -165,6 +166,48 @@ internal class BankTestController @Autowired constructor(
         }
     }
 
+  }
+
+  @Nested
+  @DisplayName("DELETE /api/banks")
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  inner class DeleteBank {
+
+    @Test
+    fun `should delete the bank with the given account number`() {
+      // given
+      val accountNumber = 1234
+
+      // when
+      mockMvc.delete("/api/banks/$accountNumber")
+        .andDo { print() }
+        .andExpect {
+          status { isNoContent() }
+        }
+
+      mockMvc.get("/api/banks/$accountNumber")
+        .andExpect {
+          status {
+            isNotFound()
+          }
+        }
+
+    }
+
+    @Test
+    fun `should return NOT FOUND if the bank with the given account number does not exist`() {
+      // given
+      val accountNumber = 22 // invalid accountNumber
+
+      // when
+      mockMvc.delete("/api/banks/$accountNumber")
+        .andDo { print() }
+        .andExpect {
+          status { isNotFound() }
+        }
+
+
+    }
   }
 
 }

@@ -4,6 +4,7 @@ import com.example.demo.BankService
 import com.example.demo.data.models.Bank
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -40,8 +41,11 @@ class BankController(private val service: BankService) {
   @ResponseStatus(HttpStatus.CREATED)
   fun addBank(@RequestBody bank: Bank) = service.addBank(bank)
 
-
   @PatchMapping("/{accountNumber}")
-  fun updateBank(@RequestBody bank: Bank, @PathVariable accountNumber: String) = service.updateBank(accountNumber ,bank)
+  fun updateBank(@RequestBody bank: Bank, @PathVariable accountNumber: String) = service.updateBank(accountNumber, bank)
+
+  @DeleteMapping("/{accountNumber}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  fun deleteBank(@PathVariable accountNumber: String) = service.deleteBank(accountNumber)
 
 }
