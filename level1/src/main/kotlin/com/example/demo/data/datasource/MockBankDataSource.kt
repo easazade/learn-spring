@@ -3,7 +3,7 @@ package com.example.demo.data.datasource
 import com.example.demo.data.models.Bank
 import org.springframework.stereotype.Repository
 
-@Repository
+@Repository("mock")
 class MockBankDataSource : BankDataSource {
 
   private val banks = mutableListOf(

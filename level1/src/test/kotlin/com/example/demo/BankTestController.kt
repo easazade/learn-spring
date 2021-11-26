@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.delete
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
+import org.springframework.transaction.annotation.Transactional
 
 /***
 note that we don't have a BankController instance in our test class since we are using @SpringBootTest annotation which launches
@@ -86,7 +88,13 @@ internal class BankTestController @Autowired constructor(
   @DisplayName("POST /api/banks")
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   inner class PostBank {
+
+
     @Test
+//    @DirtiesContext // this annotations tells our test runner that this test does something to our springboot app context that makes
+//                    // next tests to not run correctly. like changing the app data or something. so test runner will launch a new
+//                    // spring boot application for the next tests after this test is completed.
+    @Transactional
     fun `should add a new bank`() {
       // given
       val newBank = Bank("acc123", 31.415, 2)
