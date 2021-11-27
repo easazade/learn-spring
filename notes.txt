@@ -18,3 +18,24 @@ in another machine. that class should follow 3 standards.
 the classes that follow these 3 standards are called java beans
 
 spring boot's @Bean annotation indicates that the following method returns a bean object or the class is a bean
+##################################################################
+what is the parent tag in pom.xml file ?
+we can point out a parent pom.xml file for the current pom.xml file. Doing so, dependencies, properties,
+constants and many more defined at the parent pom.xml file also get merged with the current pom.xml (child pom.xml) file.
+Say you have a parent tag in your projects pom.xml that looks like below:
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.8.RELEASE</version>
+</parent>
+
+Then maven reads that parent POM from your local repository (or from repository managers like sonatype, jfrog, etc that
+you have configured) and creates a Resultant POM by combining the parent POM and your module’s POM.
+
+To see the combined result use the following mvn command:
+$ mvn help:effective-pom  
+##################################################################
+##################################################################
+##################################################################
+##################################################################
