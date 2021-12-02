@@ -2,6 +2,7 @@ package com.example.demo.data.datasource
 
 import com.example.demo.data.models.Bank
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Repository
 import org.springframework.web.client.RestTemplate
 
@@ -9,7 +10,7 @@ import org.springframework.web.client.RestTemplate
 // @Repository, @Component, @Service,  @Bean etc
 @Repository("network")
 class NetworkDataSource(
-  @Autowired private val restTemplate: RestTemplate
+  @Lazy(true) @Autowired private val restTemplate: RestTemplate
 ) : BankDataSource {
   override fun getBanks(): Collection<Bank> {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

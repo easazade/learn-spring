@@ -1,3 +1,9 @@
+ALL APPLICATION PROPERTIES THAT ARE USEFULL
+
+# lazy initialization of beans is not enabled in DEBUG mode but it recommended to do in production mode
+spring.main.lazy-initialization=true
+we could also make a certain Bean to be laziliy initialized by adding a Lazy annotation on it. or we could disable lazy initialization
+for it by adding @Lazy(false) on it. works both ways
 ##################################################################
 too build the and package the app spring boot plugin should be added to maven or gradle
 
