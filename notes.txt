@@ -90,11 +90,39 @@ The restart technology provided by Spring Boot works by using two classloaders. 
 SpringBoot Auto Reload only watches the class loader for classes we are developing not the libraries. if we add a library we need to Restart the application
 this is the main reason why reload is faster than restart. since each reload only replaces the restart class loader
 ##################################################################
+liveness state of spring boot application:
+The internal state of Spring Boot applications is mostly represented by the Spring ApplicationContext.
+If the application context has started successfully, Spring Boot assumes that the application is in a valid state.
+An application is considered live as soon as the context has been refreshed
+##################################################################
+readiness state of spring boot application:
+An application is considered ready as soon as application and command-line runners have been called
+##################################################################
+Tasks expected to run during startup should be executed by CommandLineRunner and ApplicationRunner components
+instead of using Spring component lifecycle callbacks such as @PostConstruct.
+##################################################################
 
+Some events are actually triggered before the ApplicationContext is created, so you cannot register
+ a listener on those as a @Bean. You can register them with the SpringApplication.addListeners(…​) method
+  or the SpringApplicationBuilder.listeners(…​) method.
+
+If you want those listeners to be registered automatically, regardless of the way the application is created, 
+you can add a META-INF/spring.factories file to your project and reference your listener(s) 
+by using the org.springframework.context.ApplicationListener key, as shown in the following example:
+
+org.springframework.context.ApplicationListener=com.example.project.MyListener
 ##################################################################
+spring boot application lifecycle has some events that can be lisntened to by @EventListener in any component 
+
+Event listeners should not run potentially lengthy tasks as they execute in the same thread by default. 
+Consider using application and command-line runners instead.
+
+we can also publish events to change the lifecycle of the spring boot application. 
+like when a some service that our app dependes on fails and app cannot work. 
+
+where these events can be usefull is for Kubernetes Probes to watch and find out what state application is in
+ 
 ##################################################################
-##################################################################
-##################################################################
-##################################################################
+
 ##################################################################
 ##################################################################
