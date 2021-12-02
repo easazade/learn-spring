@@ -12,3 +12,9 @@
   _|--/~\------/~\-+  |__________________| |__________________| |__________________|
  //// \O========O/       (O)       (O)        (O)        (O)       (O)        (O)
 
+version = ${application.version}
+formatted-version = ${application.formatted-version}
+spring-boot-version = ${spring-boot.version}
+spring-boot formatted version =  ${spring-boot.formatted-version}
+application title = ${application.title}
+--------------------------------------------------------------------------------------------------------------
