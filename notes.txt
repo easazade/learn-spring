@@ -50,6 +50,44 @@ supported set of managed transitive dependencies.
 
 All official starters follow a similar naming pattern; spring-boot-starter-*
 ##################################################################
+Spring Boot auto-configuration attempts to automatically configure your Spring application based on the jar dependencies that you have added
+##################################################################
+If you need to find out what auto-configuration is currently being applied, and why, start your application with the --debug switch.
+ Doing so enables debug logs for a selection of core loggers and logs a conditions report to the console
+##################################################################
+@ComponentScan scans for Spring components
+@EnableAutoConfiguration is used for auto-configuring beans present in the classpath in Spring Boot application
+##################################################################
+Developer tools are automatically disabled when running a fully packaged application. If your application is launched
+from java -jar or if it is started from a special classloader, then it is considered a “production application”.
+You can control this behavior by using the spring.devtools.restart.enabled system property. To enable devtools, irrespective of
+the classloader used to launch your application, set the -Dspring.devtools.restart.enabled=true system property. 
+This must not be done in a production environment where running devtools is a security risk. To disable devtools, exclude the dependency
+or set the -Dspring.devtools.restart.enabled=false system property.
+NOTE: Flagging the dependency as optional in Maven or using the developmentOnly configuration in Gradle (as shown above) prevents devtools 
+from being transitively applied to other modules that use your project.
+##################################################################
+spring devtools library applies default development options to make development easier like disabling browser caching by default.
+all these dedfaults can be changed in application.properties.
+also note that devtools library adds default application properties values for other projects as well
+---
+If you do not want property defaults to be applied you can set spring.devtools.add-properties to false in your application.properties.
+For a complete list of the properties that are applied by the devtools, see 
+https://github.com/spring-projects/spring-boot/tree/v2.6.1/spring-boot-project/spring-boot-devtools/src/main/java/org/springframework/boot/devtools/env/DevToolsPropertyDefaultsPostProcessor.java
+##################################################################
+NOTE: there is not need for restarting the project (auto or not) for certain resources, static assets and templates
+##################################################################
+The restart technology provided by Spring Boot works by using two classloaders. Classes that do not change (for example, those from third-party jars)
+ are loaded into a base classloader. Classes that you are actively developing are loaded into a restart classloader. When the application is restarted,
+  the restart classloader is thrown away and a new one is created. This approach means that application restarts are typically much faster than “cold starts”, 
+  since the base classloader is already available and populated.
+SpringBoot Auto Reload only watches the class loader for classes we are developing not the libraries. if we add a library we need to Restart the application
+this is the main reason why reload is faster than restart. since each reload only replaces the restart class loader
+##################################################################
+
+##################################################################
+##################################################################
+##################################################################
 ##################################################################
 ##################################################################
 ##################################################################

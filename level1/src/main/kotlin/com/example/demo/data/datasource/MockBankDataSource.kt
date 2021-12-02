@@ -1,8 +1,10 @@
 package com.example.demo.data.datasource
 
 import com.example.demo.data.models.Bank
+import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Repository
 
+@Primary
 @Repository("mock")
 class MockBankDataSource : BankDataSource {
 
