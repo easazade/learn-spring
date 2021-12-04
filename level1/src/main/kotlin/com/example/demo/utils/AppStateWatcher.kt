@@ -1,17 +1,23 @@
 package com.example.demo.utils
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.availability.AvailabilityChangeEvent
 import org.springframework.boot.availability.ReadinessState
 import org.springframework.boot.context.event.ApplicationReadyEvent
+import org.springframework.context.ApplicationContext
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 
 @Component
-class AppStateWatcher {
+class AppStateWatcher(@Autowired val context: ApplicationContext) {
 
   @EventListener
   fun onReadyStateChange(event: ApplicationReadyEvent) {
-    println("###################### READY EVENT => $event")
+    if(event.applicationContext == context) {
+      println("###################### READY EVENT => $event")
+    }else{
+      println("###################### contexts does not match")
+    }
   }
 
   @EventListener
