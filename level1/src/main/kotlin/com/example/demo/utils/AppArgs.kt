@@ -2,12 +2,14 @@ package com.example.demo.utils
 
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
+import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 // 2 ways that we setup
 
 
 @Component
+@Order(2) // Order does not work here but works for AppArgs2 which is defined using ApplicationRunner interface
 class AppArgs(args: ApplicationArguments){
 
   init {
@@ -24,6 +26,7 @@ class AppArgs(args: ApplicationArguments){
 }
 
 @Component
+@Order(3)
 class AppArgs2 : ApplicationRunner{
 
 
@@ -35,7 +38,7 @@ class AppArgs2 : ApplicationRunner{
       println(it)
     }
     args?.optionNames?.forEach {
-      println("###### ARGS => $it = ${args?.getOptionValues(it)}")
+      println("###### ARGS => $it = ${args.getOptionValues(it)}")
     }
   }
 }
