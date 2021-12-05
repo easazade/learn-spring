@@ -1,12 +1,17 @@
 package com.example.demo
 
-import org.springframework.boot.Banner
+import org.springframework.boot.ExitCodeGenerator
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
-class Level1Application
+class Level1Application {
+  @Bean
+  fun exitCodeGenerator(): ExitCodeGenerator {
+    return ExitCodeGenerator { 42 }
+  }
+}
 
 fun main(args: Array<String>) {
   // The constructor arguments passed to SpringApplication are configuration sources for Spring beans.
@@ -18,3 +23,4 @@ fun main(args: Array<String>) {
   // app.setBannerMode(Banner.Mode.OFF)
   app.run(*args)
 }
+

@@ -1,6 +1,7 @@
 package com.example.demo.utils
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.availability.AvailabilityChangeEvent
 import org.springframework.boot.availability.ReadinessState
 import org.springframework.boot.context.event.ApplicationReadyEvent
